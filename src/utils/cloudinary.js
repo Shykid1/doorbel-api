@@ -5,6 +5,9 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
+// Base Folder for Cloudinary uploads
+const baseFolder = "doorbel-assets";
+
 // Configure Cloudinary
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -16,9 +19,11 @@ cloudinary.config({
 const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
-    folder: "doorbel-assets",
+    folder: baseFolder,
     allowed_formats: ["jpg", "png", "jpeg", "gif", "svg", "webp"],
     transformation: [{ width: 500, height: 500, crop: "limit" }],
+    use_filename: true,
+    resource_type: "auto",
   },
 });
 
